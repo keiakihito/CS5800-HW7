@@ -6,6 +6,6 @@ import vending.Snack;
 public class PepsiHandler extends SnackDispenseHandler {
     @Override
     public DispenseResult handle(SnackRequest request, Map<String, Snack> snacks) {
-        throw new UnsupportedOperationException("stub");
+        return handleFor("Pepsi", request, snacks);
     }
 }
