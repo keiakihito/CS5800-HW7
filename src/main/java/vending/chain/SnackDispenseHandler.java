@@ -16,11 +16,24 @@ public abstract class SnackDispenseHandler {
     }
 
     protected DispenseResult handleFor(String snackName, SnackRequest request, Map<String, Snack> snacks) {
-        if (!snackName.equalsIgnoreCase(request.getName())) {
+        if (!isMatchingSnack(snackName, request)) {
             return forward(request, snacks);
         }
 
         Snack snack = snacks.get(snackName);
+        DispenseResult validationResult = validateSnackDispense(snack, request);
+        if (validationResult != null) {
+            return validationResult;
+        }
+
+        return dispenseSnack(snack, snackName, request);
+    }
+
+    private boolean isMatchingSnack(String snackName, SnackRequest request) {
+        return snackName.equalsIgnoreCase(request.getName());
+    }
+
+    private DispenseResult validateSnackDispense(Snack snack, SnackRequest request) {
         if (snack == null) {
             return new DispenseResult(false, request.getAmount(), "Snack not found", null);
         }
@@ -30,7 +43,10 @@ public abstract class SnackDispenseHandler {
         if (request.getAmount() < snack.getPrice()) {
             return new DispenseResult(false, request.getAmount(), "Insufficient funds", snack);
         }
+        return null; // Validation passed
+    }
 
+    private DispenseResult dispenseSnack(Snack snack, String snackName, SnackRequest request) {
         snack.decrement();
         double change = request.getAmount() - snack.getPrice();
         return new DispenseResult(true, change, "Dispensed " + snackName, snack);
