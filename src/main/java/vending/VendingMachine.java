@@ -29,15 +29,15 @@ public class VendingMachine {
     }
 
     public void selectSnack(String name) {
-        throw new UnsupportedOperationException("stub");
+        _state.selectSnack(name);
     }
 
     public void insertMoney(double amount) {
-        throw new UnsupportedOperationException("stub");
+        _state.insertMoney(amount);
     }
 
     public void dispense() {
-        throw new UnsupportedOperationException("stub");
+        _state.dispense();
     }
 
     // Helpers for tests (package-private)
@@ -59,5 +59,14 @@ public class VendingMachine {
 
     SnackDispenseHandler getHandler() {
         return _handler;
+    }
+
+    // setters used by state implementations
+    public void setState(State state) {
+        this._state = state;
+    }
+
+    public void setSelectedSnack(String selectedSnack) {
+        this._selectedSnack = selectedSnack;
     }
 }

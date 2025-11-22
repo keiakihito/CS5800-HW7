@@ -11,16 +11,17 @@ public class IdleState implements State {
 
     @Override
     public void selectSnack(String name) {
-        throw new UnsupportedOperationException("stub");
+        _machine.setSelectedSnack(name);
+        _machine.setState(new WaitingForMoneyState(_machine));
     }
 
     @Override
     public void insertMoney(double amount) {
-        throw new UnsupportedOperationException("stub");
+        // ignore; cannot insert money before selecting
     }
 
     @Override
     public void dispense() {
-        throw new UnsupportedOperationException("stub");
+        // ignore; nothing to dispense
     }
 }
