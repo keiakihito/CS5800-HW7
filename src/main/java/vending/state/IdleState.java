@@ -17,11 +17,11 @@ public class IdleState implements State {
 
     @Override
     public void insertMoney(double amount) {
-        // ignore; cannot insert money before selecting
+        throw new IllegalStateException("Cannot insert money before selecting a snack.");
     }
 
     @Override
     public void dispense() {
-        // ignore; nothing to dispense
+        throw new IllegalStateException("Cannot dispense. No snack selected.");
     }
 }

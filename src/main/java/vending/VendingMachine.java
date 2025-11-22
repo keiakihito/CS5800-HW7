@@ -45,15 +45,15 @@ public class VendingMachine {
         return _state;
     }
 
-    String getSelectedSnack() {
+    public String getSelectedSnack() {
         return _selectedSnack;
     }
 
-    double getInsertedMoney() {
+    public double getInsertedMoney() {
         return _insertedMoney;
     }
 
-    Map<String, Snack> getSnacks() {
+    public Map<String, Snack> getSnacks() {
         return _snacks;
     }
 
@@ -68,5 +68,9 @@ public class VendingMachine {
 
     public void setSelectedSnack(String selectedSnack) {
         this._selectedSnack = selectedSnack;
+    }
+
+    public void setInsertedMoney(double amount) {
+        this._insertedMoney = amount;
     }
 }

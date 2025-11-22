@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import vending.state.IdleState;
 import vending.state.State;
 import vending.state.WaitingForMoneyState;
+import vending.state.DispensingState;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -34,5 +35,15 @@ class VendingMachineTest {
 
         assertTrue(machine.getState() instanceof WaitingForMoneyState, "Should move to WaitingForMoney after selection");
         assertEquals("Coke", machine.getSelectedSnack());
+    }
+
+    @Test
+    void insertingEnoughMoneyMovesToDispensing() {
+        VendingMachine machine = new VendingMachine();
+        machine.selectSnack("Coke");
+
+        machine.insertMoney(2.00);
+
+        assertTrue(machine.getState() instanceof DispensingState, "Should move to Dispensing after enough money");
     }
 }
