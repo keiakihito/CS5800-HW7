@@ -24,10 +24,17 @@ public class Snack {
     }
 
     public boolean isAvailable() {
-        throw new UnsupportedOperationException("stub");
+        return _quantity > 0;
     }
 
     public void decrement() {
-        throw new UnsupportedOperationException("stub");
+        if (_quantity > 0) {
+            _quantity--;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Snack{name='%s', price=%.2f, quantity=%d}".formatted(_name, _price, _quantity);
     }
 }
