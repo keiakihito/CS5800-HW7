@@ -1,11 +1,11 @@
 package vending;
 
-import java.util.HashMap;
 import java.util.Map;
-
 import vending.chain.SnackDispenseHandler;
 import vending.state.IdleState;
 import vending.state.State;
+import vending.setup.SnackInventory;
+import vending.setup.HandlerChainBuilder;
 
 public class VendingMachine {
     private State _state;
@@ -14,12 +14,18 @@ public class VendingMachine {
     private String _selectedSnack;
     private double _insertedMoney;
 
-    public VendingMachine() {
-        _snacks = new HashMap<>();
-        _handler = null;
+    // Public constructor for dependency injection (used by factory and testing)
+    public VendingMachine(Map<String, Snack> snacks, SnackDispenseHandler handler) {
+        _snacks = snacks;
+        _handler = handler;
         _selectedSnack = null;
         _insertedMoney = 0.0;
         _state = new IdleState(this);
+    }
+
+    // Public constructor maintains backward compatibility
+    public VendingMachine() {
+        this(SnackInventory.createDefaultInventory(), HandlerChainBuilder.buildDefaultChain());
     }
 
     public void selectSnack(String name) {
