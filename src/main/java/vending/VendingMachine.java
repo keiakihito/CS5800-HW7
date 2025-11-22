@@ -1,8 +1,10 @@
 package vending;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import vending.chain.SnackDispenseHandler;
+import vending.state.IdleState;
 import vending.state.State;
 
 public class VendingMachine {
@@ -11,6 +13,14 @@ public class VendingMachine {
     private SnackDispenseHandler _handler;
     private String _selectedSnack;
     private double _insertedMoney;
+
+    public VendingMachine() {
+        _snacks = new HashMap<>();
+        _handler = null;
+        _selectedSnack = null;
+        _insertedMoney = 0.0;
+        _state = new IdleState(this);
+    }
 
     public void selectSnack(String name) {
         throw new UnsupportedOperationException("stub");
