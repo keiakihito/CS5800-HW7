@@ -12,7 +12,7 @@ public abstract class SnackDispenseHandler {
     }
 
     public DispenseResult handle(SnackRequest request, Map<String, Snack> snacks) {
-        throw new UnsupportedOperationException("stub");
+        return forward(request, snacks);
     }
 
     protected DispenseResult forward(SnackRequest request, Map<String, Snack> snacks) {
