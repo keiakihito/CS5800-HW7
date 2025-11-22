@@ -2,49 +2,55 @@
 skinparam monochrome true
 skinparam classAttributeIconSize 0
 
-class VendingMachine {
-  -state: State
-  -snacks: Map<String, Snack>
-  -handler: SnackDispenseHandler
-  +selectSnack(name)
-  +insertMoney(amount)
-  +dispense()
+package "vending" {
+  class VendingMachine {
+    -state: State
+    -snacks: Map<String, Snack>
+    -handler: SnackDispenseHandler
+    +selectSnack(name)
+    +insertMoney(amount)
+    +dispense()
+  }
+
+  class Snack {
+    -name: String
+    -price: double
+    -quantity: int
+    +isAvailable(): boolean
+  }
 }
 
-interface State {
-  +selectSnack(name)
-  +insertMoney(amount)
-  +dispense()
+package "vending.state" {
+  interface State {
+    +selectSnack(name)
+    +insertMoney(amount)
+    +dispense()
+  }
+
+  class IdleState
+  class WaitingForMoneyState
+  class DispensingState
 }
 
-class IdleState
-class WaitingForMoneyState
-class DispensingState
+package "vending.chain" {
+  abstract class SnackDispenseHandler {
+    -next: SnackDispenseHandler
+    +setNext(handler)
+    +handle(request)
+  }
 
-class Snack {
-  -name: String
-  -price: double
-  -quantity: int
-  +isAvailable(): boolean
+  class SnackRequest {
+    +name: String
+    +amount: double
+  }
+
+  class CokeHandler
+  class PepsiHandler
+  class CheetosHandler
+  class DoritosHandler
+  class KitKatHandler
+  class SnickersHandler
 }
-
-abstract class SnackDispenseHandler {
-  -next: SnackDispenseHandler
-  +setNext(handler)
-  +handle(request)
-}
-
-class SnackRequest {
-  +name: String
-  +amount: double
-}
-
-class CokeHandler
-class PepsiHandler
-class CheetosHandler
-class DoritosHandler
-class KitKatHandler
-class SnickersHandler
 
 VendingMachine --> State
 VendingMachine --> SnackDispenseHandler : handler
