@@ -13,6 +13,7 @@ public class VendingMachine {
     private SnackDispenseHandler _handler;
     private String _selectedSnack;
     private double _insertedMoney;
+    private vending.chain.DispenseResult _lastDispenseResult;
 
     // Public constructor for dependency injection (used by factory and testing)
     public VendingMachine(Map<String, Snack> snacks, SnackDispenseHandler handler) {
@@ -20,6 +21,7 @@ public class VendingMachine {
         _handler = handler;
         _selectedSnack = null;
         _insertedMoney = 0.0;
+        _lastDispenseResult = null;
         _state = new IdleState(this);
     }
 
@@ -57,8 +59,12 @@ public class VendingMachine {
         return _snacks;
     }
 
-    SnackDispenseHandler getHandler() {
+    public SnackDispenseHandler getHandler() {
         return _handler;
+    }
+
+    public vending.chain.DispenseResult getLastDispenseResult() {
+        return _lastDispenseResult;
     }
 
     // setters used by state implementations
@@ -72,5 +78,9 @@ public class VendingMachine {
 
     public void setInsertedMoney(double amount) {
         this._insertedMoney = amount;
+    }
+
+    public void setLastDispenseResult(vending.chain.DispenseResult result) {
+        this._lastDispenseResult = result;
     }
 }
