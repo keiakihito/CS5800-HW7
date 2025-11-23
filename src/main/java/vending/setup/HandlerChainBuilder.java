@@ -10,6 +10,7 @@ import vending.chain.SnickersHandler;
 
 public class HandlerChainBuilder {
     public static SnackDispenseHandler buildDefaultChain() {
+        // Centralized wiring so VendingMachine doesn't have to know about handler ordering.
         SnackDispenseHandler head = new CokeHandler();
         head
             .setNext(new PepsiHandler())
@@ -20,4 +21,3 @@ public class HandlerChainBuilder {
         return head;
     }
 }
-

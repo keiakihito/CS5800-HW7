@@ -6,6 +6,7 @@ import vending.Snack;
 
 public class SnackInventory {
     public static Map<String, Snack> createDefaultInventory() {
+        // Central place to seed default snacks so tests/driver share the same data.
         Map<String, Snack> snacks = new HashMap<>();
         snacks.put("Coke", new Snack("Coke", 1.50, 2));
         snacks.put("Pepsi", new Snack("Pepsi", 1.50, 2));
@@ -16,4 +17,3 @@ public class SnackInventory {
         return snacks;
     }
 }
-
