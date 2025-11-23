@@ -19,7 +19,7 @@ public class WaitingForMoneyState implements State {
     public void insertMoney(double amount) {
         double newAmount = addMoney(amount);
         if (isReadyToDispense(newAmount)) {
-            transitionToDispensing();
+            transitionToDispensing(); // move forward only when funds meet or exceed the price
         }
     }
 

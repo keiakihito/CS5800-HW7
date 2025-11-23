@@ -16,6 +16,7 @@ public abstract class SnackDispenseHandler {
     }
 
     protected DispenseResult handleFor(String snackName, SnackRequest request, Map<String, Snack> snacks) {
+        // Concrete handlers call this: if name matches, try to dispense, otherwise pass down the chain.
         if (!isMatchingSnack(snackName, request)) {
             return forward(request, snacks);
         }

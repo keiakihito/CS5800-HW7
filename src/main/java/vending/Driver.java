@@ -7,6 +7,7 @@ public class Driver {
         VendingMachine machine = VendingMachineFactory.createDefault();
 
         System.out.println("=== Vending Machine Demo (State + Chain of Responsibility) ===");
+        System.out.println("Each block: select -> insert -> dispense to show state transitions and handler chain.\n");
         System.out.println();
         System.out.println("Selecting Coke");
         machine.selectSnack("Coke");

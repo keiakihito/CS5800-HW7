@@ -11,7 +11,7 @@ public class IdleState implements State {
 
     @Override
     public void selectSnack(String name) {
-        _machine.setSelectedSnack(name);
+        _machine.setSelectedSnack(name); // record choice and advance to waiting state
         _machine.setState(new WaitingForMoneyState(_machine));
     }
 
